@@ -3,6 +3,7 @@ import { Roboto_400Regular, Roboto_700Bold, useFonts } from '@expo-google-fonts/
 import { THEME } from './src/styles/theme';
 import { Loading } from './src/components/loading';
 import { Routes } from './src/routes';
+import React from 'react';
 
 
 export default function App() {

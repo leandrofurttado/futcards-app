@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import SignIn from '../screens/SignIn';
 import { Loading } from '../components/loading';
 import { AppRotas } from './appRoutes';
+import React from 'react';
 
 
 

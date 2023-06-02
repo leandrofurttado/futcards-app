@@ -1,4 +1,5 @@
 import { Input as InputNativeBase, IInputProps } from "native-base";
+import React from "react";
 
 export default function Input({...rest }: IInputProps) {
     return (
