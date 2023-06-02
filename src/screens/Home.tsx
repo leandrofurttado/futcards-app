@@ -1,11 +1,12 @@
 import { HStack, Heading, VStack, Image, Icon } from "native-base";
-import { ShoppingCart } from 'phosphor-react-native'
+import { BookOpen, IdentificationCard, ShoppingCart, SoccerBall, StarFour } from 'phosphor-react-native'
 import FutCardsLogo from "../assets/bayernlogo.png"
 import BayernLogo from "../assets/bayernlogo.png"
 import { useEffect, useState } from "react";
 import React from "react";
 import { Loading } from "../components/loading";
 import { TouchableOpacity, View } from "react-native";
+import STYLES from "../styles/stylesPages";
 
 
 
@@ -17,7 +18,7 @@ export function Home() {
       // Função assíncrona para buscar os dados da API
       async function fetchData() {
         try {
-            const response = await fetch('https://futcardsbrasil.000webhostapp.com/usuarios/consultar/40');
+            const response = await fetch('https://futcardsbrasil.000webhostapp.com/usuarios/consultar/20');
             const data = await response.json();
             setUserData(data); // Armazena os dados da API no estado
         } catch (error) {
@@ -56,40 +57,61 @@ export function Home() {
             Créditos: $
           </Heading>
 
+          {/* Editar */}
           <TouchableOpacity
-            style={{
-              marginTop: 20,
-              backgroundColor: '#191970',
-              borderRadius: 10,
-              padding: 20,
-              alignItems: 'center',
-            }}
+            style={STYLES.button_style_editarPerfil}
           > 
 
-            <Heading display="flex" color="gray.100" fontSize="xl">
-              {<ShoppingCart size={20} weight="bold" color="white" />} Loja de cartas
+            <IdentificationCard size={30} weight="bold" color="white" style={{ display: 'flex' }} />
+            <Heading display="flex" color="gray.100" fontSize="xl" alignItems="center" ml={2}>
+              Editar perfil
             </Heading>
           </TouchableOpacity>
+
+          {/* Loja de cartas */}
+          <TouchableOpacity
+            style={STYLES.button_style}
+            
+          > 
+
+            <ShoppingCart size={30} weight="bold" color="white" style={{ display: 'flex' }} />
+            <Heading display="flex" color="gray.100" fontSize="xl" alignItems="center" ml={2}>
+              Loja de cartas
+            </Heading>
+          </TouchableOpacity>
+
+          {/* Inventário */}
+          <TouchableOpacity
+            style={STYLES.button_style}
+          > 
+
+            <BookOpen size={30} weight="bold" color="white" style={{ display: 'flex' }} />
+            <Heading display="flex" color="gray.100" fontSize="xl" alignItems="center" ml={2}>
+              Inventário
+            </Heading>
+          </TouchableOpacity>
+
         </VStack>
 
         <TouchableOpacity
           style={{
             backgroundColor: 'white',
             borderRadius: 10,
-            padding: 20,
+            padding: 5,
             position: 'absolute',
             bottom: 20,
             left: 0,
             right: 0,
             alignItems: 'center',
             marginHorizontal: 20,
+            justifyContent: 'center',
           }}
         >
           <Heading display="flex" color="black" fontSize="xl">
-            Ganhar carta diária
+            Sorte diária
           </Heading>
+          <StarFour size={30} weight="bold" color="#FFD700" style={{ display: 'flex' }} />
         </TouchableOpacity>
       </View>
-
     );
   }
