@@ -2,20 +2,40 @@ import { VStack, Heading, Icon, Image } from "native-base";
 import React, { useState } from "react";
 import Input from "../components/Input";
 import { Envelope, Key } from 'phosphor-react-native'
-import LogoBooks from '../assets/Books-logo.png'
+import FutCardsLogo from '../assets/FutCards_logo.png'
 import { Button } from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
+import * as Animatable from 'react-native-animatable';
 
 export default function SignIn() {
     const [isLoading, setIsLoading] = useState(false);
 
+    
+    const navigation = useNavigation();
+
 
     function LoadingLogin(){
         setIsLoading(true);
+        navigation.navigate("home");
     }
 
+    const [isVisible, setIsVisible] = React.useState(false);
+    
+    React.useEffect(() => {
+        setIsVisible(true);
+    }, []);
+      
     return (
-        <VStack flex={1} bg="gray.600" alignItems="center" px={8} py={24}>
-            <Image source={LogoBooks} resizeMode="contain" size="xl" alt="logo"/>
+        <VStack flex={1} bg="green.700" alignItems="center" px={8} py={24}>
+            <Image source={FutCardsLogo} resizeMode="contain" size="xl" alt="logo"/>
+            <Animatable.Text
+                animation="fadeIn"
+                duration={5000}
+                delay={2000}
+                style={{ color: 'yellow',  fontSize: 30, marginTop: 10 }}
+            >
+                FUTCARDS
+            </Animatable.Text>
             <Heading color="gray.100" fontSize="xl" mt={10}>
                 Acesse sua conta:
             </Heading>
@@ -25,7 +45,8 @@ export default function SignIn() {
             </Heading>
             <Input 
                 placeholder="E-mail"
-                placeholderTextColor={"black"}
+                backgroundColor="blue.900"
+                placeholderTextColor={"white"}
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -34,7 +55,7 @@ export default function SignIn() {
                 _focus={{
                     borderWidth: 1,
                     borderColor: "yellow.500",
-                    bg:"gray.400"
+                    backgroundColor:"gray.400"
                 }}
 
                 InputLeftElement={<Icon as={<Envelope color={"white"}/> } ml={3} />}
@@ -45,7 +66,8 @@ export default function SignIn() {
             </Heading>
             <Input 
                 placeholder="Senha"
-                placeholderTextColor={"black"}
+                placeholderTextColor={"white"}
+                backgroundColor="blue.900"
                 secureTextEntry
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -54,7 +76,7 @@ export default function SignIn() {
                 _focus={{
                     borderWidth: 1,
                     borderColor: "yellow.500",
-                    bg:"gray.400"
+                    backgroundColor:"gray.400"
                 }}
 
                 InputLeftElement={<Icon as={<Key color={"white"}/> } ml={3} />}
@@ -66,8 +88,9 @@ export default function SignIn() {
             />
 
 
+
             <Heading color="gray.100" fontSize="xs" mt={20}>
-                Copyright ₢ 2023 - Leandro 
+                Copyright ₢ 2023 - FutCards Brasil 
             </Heading>
         </VStack>
     );
