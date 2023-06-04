@@ -4,7 +4,7 @@ import { extendTheme } from "native-base";
 export const STYLES = extendTheme({
     button_style_editarPerfil: {
         marginTop: 20,
-        backgroundColor: 'orange',
+        backgroundColor: 'white',
         borderRadius: 10,
         padding: 20,
         alignItems: 'center',
@@ -13,7 +13,7 @@ export const STYLES = extendTheme({
         width: 200,
     },
     button_style: {
-        
+
         marginTop: 20,
         backgroundColor: '#191970',
         borderRadius: 10,

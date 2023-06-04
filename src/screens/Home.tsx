@@ -2,6 +2,7 @@ import { HStack, Heading, VStack, Image, Icon } from "native-base";
 import { BookOpen, IdentificationCard, ShoppingCart, SoccerBall, StarFour } from 'phosphor-react-native'
 import FutCardsLogo from "../assets/bayernlogo.png"
 import BayernLogo from "../assets/bayernlogo.png"
+import MessiLogo from "../assets/messi.jpg"
 import { useEffect, useState } from "react";
 import React from "react";
 import { Loading } from "../components/loading";
@@ -13,6 +14,7 @@ import STYLES from "../styles/stylesPages";
 
 export function Home() {
     const [userData, setUserData] = useState(null);
+    const [roletaOn, setRoletaOn] = useState(true);
   
     useEffect(() => {
       // Função assíncrona para buscar os dados da API
@@ -54,7 +56,7 @@ export function Home() {
           </Heading>
 
           <Heading display="flex" color="gray.100" fontSize="xl" mt={10}>
-            Créditos: $
+            FC Points: $
           </Heading>
 
           {/* Editar */}
@@ -62,8 +64,8 @@ export function Home() {
             style={STYLES.button_style_editarPerfil}
           > 
 
-            <IdentificationCard size={30} weight="bold" color="white" style={{ display: 'flex' }} />
-            <Heading display="flex" color="gray.100" fontSize="xl" alignItems="center" ml={2}>
+            <IdentificationCard size={30} weight="bold" color="black" style={{ display: 'flex' }} />
+            <Heading display="flex" color="black" fontSize="xl" alignItems="center" ml={2}>
               Editar perfil
             </Heading>
           </TouchableOpacity>
@@ -87,7 +89,7 @@ export function Home() {
 
             <BookOpen size={30} weight="bold" color="white" style={{ display: 'flex' }} />
             <Heading display="flex" color="gray.100" fontSize="xl" alignItems="center" ml={2}>
-              Inventário
+              Minhas Cartas
             </Heading>
           </TouchableOpacity>
 
@@ -107,10 +109,11 @@ export function Home() {
             justifyContent: 'center',
           }}
         >
-          <Heading display="flex" color="black" fontSize="xl">
-            Sorte diária
+
+          <Heading display="flex" color="black" fontSize="xl" mb={2}>
+            {roletaOn ? 'Roleta diária disponível, clique!' : 'Roleta indisponível, volte daqui 02:05:23 horas.'}
           </Heading>
-          <StarFour size={30} weight="bold" color="#FFD700" style={{ display: 'flex' }} />
+          <StarFour size={30} weight="bold" color="#FFD700" />
         </TouchableOpacity>
       </View>
     );
