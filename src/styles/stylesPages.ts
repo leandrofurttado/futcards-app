@@ -1,4 +1,6 @@
 import { extendTheme } from "native-base";
+import { ViewStyle } from 'react-native';
+
 
 
 export const STYLES = extendTheme({
@@ -10,10 +12,9 @@ export const STYLES = extendTheme({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        width: 200,
-    },
+        width: 250,
+    } as ViewStyle, //sendo necessário passar ViewStyle pois o style TouchableOpacity nao aceita o style direto do native-base
     button_style: {
-
         marginTop: 20,
         backgroundColor: '#191970',
         borderRadius: 10,
@@ -21,8 +22,8 @@ export const STYLES = extendTheme({
         alignContent: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        width: 200,
-    },
+        width: 250,
+    } as ViewStyle,
 })
 
 export default STYLES

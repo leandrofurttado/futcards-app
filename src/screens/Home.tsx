@@ -20,7 +20,7 @@ export function Home() {
       // Função assíncrona para buscar os dados da API
       async function fetchData() {
         try {
-            const response = await fetch('https://futcardsbrasil.000webhostapp.com/usuarios/consultar/20');
+            const response = await fetch('https://futcardsbrasil.000webhostapp.com/usuarios/consultar/40');
             const data = await response.json();
             setUserData(data); // Armazena os dados da API no estado
         } catch (error) {
@@ -63,7 +63,6 @@ export function Home() {
           <TouchableOpacity
             style={STYLES.button_style_editarPerfil}
           > 
-
             <IdentificationCard size={30} weight="bold" color="black" style={{ display: 'flex' }} />
             <Heading display="flex" color="black" fontSize="xl" alignItems="center" ml={2}>
               Editar perfil
@@ -75,7 +74,6 @@ export function Home() {
             style={STYLES.button_style}
             
           > 
-
             <ShoppingCart size={30} weight="bold" color="white" style={{ display: 'flex' }} />
             <Heading display="flex" color="gray.100" fontSize="xl" alignItems="center" ml={2}>
               Loja de cartas
@@ -97,7 +95,7 @@ export function Home() {
 
         <TouchableOpacity
           style={{
-            backgroundColor: 'white',
+            backgroundColor: roletaOn ? 'gold' : 'white',
             borderRadius: 10,
             padding: 5,
             position: 'absolute',
@@ -111,9 +109,9 @@ export function Home() {
         >
 
           <Heading display="flex" color="black" fontSize="xl" mb={2}>
-            {roletaOn ? 'Roleta diária disponível, clique!' : 'Roleta indisponível, volte daqui 02:05:23 horas.'}
+            {roletaOn ? 'Roleta diária disponível' : 'Roleta indisponível, aguarde para jogar.'}
           </Heading>
-          <StarFour size={30} weight="bold" color="#FFD700" />
+          <StarFour size={30} weight="bold" color="black" />
         </TouchableOpacity>
       </View>
     );

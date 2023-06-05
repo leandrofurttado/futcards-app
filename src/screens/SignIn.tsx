@@ -32,7 +32,7 @@ export default function SignIn() {
                 animation="fadeIn"
                 duration={5000}
                 delay={2000}
-                style={{ color: 'yellow',  fontSize: 30, marginTop: 10 }}
+                style={{ color: 'yellow',  fontSize: 30, marginTop: 10, fontWeight:'bold' }}
             >
                 FUTCARDS
             </Animatable.Text>
@@ -45,7 +45,7 @@ export default function SignIn() {
             </Heading>
             <Input 
                 placeholder="E-mail"
-                backgroundColor="blue.900"
+                backgroundColor="#4F4F4F"
                 placeholderTextColor={"white"}
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -53,8 +53,8 @@ export default function SignIn() {
                 mb={4}
                 mt={4}
                 _focus={{
-                    borderWidth: 1,
-                    borderColor: "yellow.500",
+                    borderWidth: 2,
+                    borderColor: "white",
                     backgroundColor:"gray.400"
                 }}
 
@@ -67,15 +67,15 @@ export default function SignIn() {
             <Input 
                 placeholder="Senha"
                 placeholderTextColor={"white"}
-                backgroundColor="blue.900"
+                backgroundColor="#4F4F4F"
                 secureTextEntry
                 autoCapitalize="none"
                 autoCorrect={false}
                 mb={4}
                 mt={4}
                 _focus={{
-                    borderWidth: 1,
-                    borderColor: "yellow.500",
+                    borderWidth: 2,
+                    borderColor: "white",
                     backgroundColor:"gray.400"
                 }}
 
@@ -87,11 +87,10 @@ export default function SignIn() {
                 isLoading={isLoading}
             />
 
-
-
-            <Heading color="gray.100" fontSize="xs" mt={20}>
+            <Heading color="gray.100" fontSize="xs" mt={10}>
                 Copyright ₢ 2023 - FutCards Brasil 
             </Heading>
+
         </VStack>
     );
 }
