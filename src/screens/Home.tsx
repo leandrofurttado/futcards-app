@@ -24,7 +24,7 @@ export function Home() {
             const data = await response.json();
             setUserData(data); // Armazena os dados da API no estado
         } catch (error) {
-            console.error('Erro ao consultar a API:', error);
+            setUserData(false);
         }
       }
   
@@ -52,11 +52,11 @@ export function Home() {
           </HStack>
 
           <Heading color="gray.100" fontSize="xl" mt={10}>
-            {userData ? `Bem vindo, ${userData.nome_completo}!` : <Loading />}
+            {userData ? `Bem vindo, ${userData.nome_completo}!` : <Loading/>}
           </Heading>
 
-          <Heading display="flex" color="gray.100" fontSize="xl" mt={10}>
-            FC Points: $
+          <Heading display="flex" color="gray.100" fontSize="xl" mt={5}>
+            FC Points: {userData ? userData.credits : '-'}
           </Heading>
 
           {/* Editar */}
