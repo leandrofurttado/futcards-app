@@ -1,21 +1,23 @@
 import { VStack, Heading, Icon, Image } from "native-base";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Input from "../components/Input";
 import { Envelope, Key } from 'phosphor-react-native'
 import FutCardsLogo from '../assets/FutCards_logo.png'
 import { Button } from "../components/Button";
-import { useNavigation } from "@react-navigation/native";
 import * as Animatable from 'react-native-animatable';
+import { AuthContext } from "../contexts/authLogin";
 
 export default function SignIn() {
     const [isLoading, setIsLoading] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     
-    const navigation = useNavigation();
+    const { logar }  = useContext(AuthContext);
 
 
     function LoadingLogin(){
-        navigation.navigate("home");
+        logar(username, password);
     }
 
     const [isVisible, setIsVisible] = React.useState(false);
@@ -45,6 +47,8 @@ export default function SignIn() {
             <Input 
                 placeholder="E-mail"
                 backgroundColor="#4F4F4F"
+                value={username}
+                onChangeText={(text) => setUsername(text)}
                 placeholderTextColor={"white"}
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -66,6 +70,8 @@ export default function SignIn() {
             <Input 
                 placeholder="Senha"
                 placeholderTextColor={"white"}
+                value={password}
+                onChangeText={(text) => setPassword(text)}
                 backgroundColor="#4F4F4F"
                 secureTextEntry
                 autoCapitalize="none"
@@ -75,7 +81,7 @@ export default function SignIn() {
                 _focus={{
                     borderWidth: 2,
                     borderColor: "white",
-                    backgroundColor:"gray.400"
+                    backgroundColor:"gray.400",
                 }}
 
                 InputLeftElement={<Icon as={<Key color={"white"}/> } ml={3} />}
