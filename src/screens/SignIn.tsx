@@ -15,7 +15,6 @@ export default function SignIn() {
 
 
     function LoadingLogin(){
-        setIsLoading(true);
         navigation.navigate("home");
     }
 

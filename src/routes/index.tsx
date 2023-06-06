@@ -10,15 +10,11 @@ import React from 'react';
 
 export function Routes() {
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(true);
+
 
     return (
         <NavigationContainer>
-            {user ? (
-                <AppRotas />
-            ) : (
-                <SignIn />
-            )}
+            <AppRotas />
         </NavigationContainer>
     );
 }
