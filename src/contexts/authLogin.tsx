@@ -8,16 +8,19 @@ import { Loading } from "../components/loading";
 interface AuthContextType {
   logar: (username: string, password: string) => void;
   idUser: string;
+  isReady: boolean;
 }
 
 //APLICAÇÃO DA TIPAGEM NO CONTEXT
 export const AuthContext = createContext<AuthContextType>({
   logar: () => {},
   idUser: '',
+  isReady: false,
 });
 
 function AuthProvider({children}){
   const [idUser, setIdUser] = useState('');
+  const [isReady, setIsReady] = useState(false);
   const navegar = useNavigation();
 
   function logar(username, password) {
@@ -35,9 +38,13 @@ function AuthProvider({children}){
 
     if (username && password) {
         async function fetchData() {
-
           try {
             //foi usado para passar no body da pesquisa.
+            setIsReady(true);
+            setTimeout(() => {
+              setIsReady(false);
+            }, 3000);
+            
             const formData = new FormData();
             formData.append('username', username);
             formData.append('password', password);
@@ -52,6 +59,7 @@ function AuthProvider({children}){
             if(data["0"]=="erro"){
               return Alert.alert('Erro', 'Usuário ou senha inválidos.')
             } else if (data["0"]=="sucesso"){
+              setIsReady(false);
               Alert.alert('Sucesso', 'Login efetuado com sucesso!')
               setIdUser(data["mensagem"]);
               navegar.navigate("home");
@@ -68,7 +76,7 @@ function AuthProvider({children}){
 
   return(
     //provider irá passar para outros lugares o USUARIO logado.
-      <AuthContext.Provider value={{ logar , idUser}}>
+      <AuthContext.Provider value={{ logar , idUser, isReady}}>
           {children}
       </AuthContext.Provider>
   )

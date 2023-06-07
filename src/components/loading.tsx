@@ -3,7 +3,7 @@ import React from "react";
 
 export function Loading() {
     return (
-        <Center flex={1} bg="green.900">
+        <Center flex={1} bg="green.700">
             <Spinner color="blue" size="lg"/>
         </Center>
     )

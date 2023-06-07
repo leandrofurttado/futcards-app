@@ -1,4 +1,4 @@
-import { VStack, Heading, Icon, Image, Text } from "native-base";
+import { VStack, Heading, Icon, Image, Text, KeyboardAvoidingView, ScrollView } from "native-base";
 import React, { useContext, useState } from "react";
 import Input from "../components/Input";
 import { Envelope, Key } from 'phosphor-react-native'
@@ -28,84 +28,87 @@ export default function Register() {
     }, []);
       
     return (
-        <VStack flex={1} bg="green.700" alignItems="center" px={8} py={24}>
-            <Image source={FutCardsLogo} resizeMode="contain" size="xl" alt="logo"/>
-            <Animatable.Text
-                animation="fadeIn"
-                duration={5000}
-                delay={2000}
-                style={{ color: 'yellow',  fontSize: 30, marginTop: 10, fontWeight:'bold' }}
-            >
-                FUTCARDS
-            </Animatable.Text>
-            <Heading color="gray.100" fontSize="xl" mt={10}>
-                Cadastro 
-            </Heading>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
+            <ScrollView>
+                <VStack bg="green.700" alignItems="center" px={8} py={24}>
+                    <Image source={FutCardsLogo} resizeMode="contain" size={20} alt="logo"/>
+                    <Animatable.Text
+                        animation="fadeIn"
+                        duration={1000}
+                        delay={1000}
+                        style={{ color: 'yellow',  fontSize: 25, marginTop: 5, fontWeight:'bold' }}
+                    >
+                         FUTCARDS - Cadastro
+                    </Animatable.Text>
+                    <Heading color="gray.100" fontSize="xl" mt={5}>
+                        Cadastre-se:
+                    </Heading>
 
-            <Heading color="gray.100" fontSize="md" mt={10}>
-                Usuario:
-            </Heading>
-            <Input 
-                placeholder="E-mail"
-                backgroundColor="#4F4F4F"
-                value={username}
-                onChangeText={(text) => setUsername(text)}
-                placeholderTextColor={"white"}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-                mb={4}
-                mt={4}
-                _focus={{
-                    borderWidth: 2,
-                    borderColor: "white",
-                    backgroundColor:"gray.400"
-                }}
+                    <Heading color="gray.100" fontSize="md" mt={10}>
+                        Usuario:
+                    </Heading>
+                    <Input 
+                        placeholder="Usuário"
+                        backgroundColor="#4F4F4F"
+                        value={username}
+                        onChangeText={(text) => setUsername(text)}
+                        placeholderTextColor={"white"}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        mb={4}
+                        mt={4}
+                        _focus={{
+                            borderWidth: 2,
+                            borderColor: "white",
+                            backgroundColor:"gray.400"
+                        }}
 
-                InputLeftElement={<Icon as={<Envelope color={"white"}/> } ml={3} />}
-            />
+                        InputLeftElement={<Icon as={<Envelope color={"white"}/> } ml={3} />}
+                    />
 
-            <Heading color="gray.100" fontSize="md" mt={4}>
-                Senha:
-            </Heading>
-            <Input 
-                placeholder="Senha"
-                placeholderTextColor={"white"}
-                value={password}
-                onChangeText={(text) => setPassword(text)}
-                backgroundColor="#4F4F4F"
-                secureTextEntry
-                autoCapitalize="none"
-                autoCorrect={false}
-                mb={4}
-                mt={4}
-                _focus={{
-                    borderWidth: 2,
-                    borderColor: "white",
-                    backgroundColor:"gray.400",
-                }}
+                    <Heading color="gray.100" fontSize="md" mt={4}>
+                        Senha:
+                    </Heading>
+                    <Input 
+                        placeholder="Senha"
+                        placeholderTextColor={"white"}
+                        value={password}
+                        onChangeText={(text) => setPassword(text)}
+                        backgroundColor="#4F4F4F"
+                        secureTextEntry
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        mb={4}
+                        mt={4}
+                        _focus={{
+                            borderWidth: 2,
+                            borderColor: "white",
+                            backgroundColor:"gray.400",
+                        }}
 
-                InputLeftElement={<Icon as={<Key color={"white"}/> } ml={3} />}
-            />
-            <Button 
-                title="Entrar"
-                onPress={LoadingLogin}
-                isLoading={isLoading}
-            />
-            
-            <Text style={{ color: 'white', fontSize: 12, marginTop: 15 }}>
-                Não possui conta?
-                <TouchableOpacity >
-                    <Text style={{ color: 'white', fontSize: 15, marginTop: 5, marginLeft: 5 , backgroundColor: 'rgba(128, 128, 128, 0.5)', borderRadius: 10 }}>
-                    Registre-se aqui.
+                        InputLeftElement={<Icon as={<Key color={"white"}/> } ml={3} />}
+                    />
+                    <Button 
+                        title={"Entrar"}
+                        onPress={LoadingLogin}
+                    />
+                    
+                    <Text style={{ color: 'white', fontSize: 12, marginTop: 15 }}>
+                        Não possui conta?
+                        <TouchableOpacity >
+                            <Text style={{ color: 'white', fontSize: 15, marginTop: 15, marginLeft: 5 , backgroundColor: 'rgba(128, 128, 128, 0.5)', borderRadius: 10 }}>
+                            Registre-se aqui.
+                            </Text>
+                        </TouchableOpacity>
                     </Text>
-                </TouchableOpacity>
-            </Text>
 
-            <Heading color="gray.100" fontSize="xs" mt={20} >
-                Copyright ₢ 2023 - FutCards Brasil 
-            </Heading>
+                    <Heading color="gray.100" fontSize="xs" mt={20} >
+                        Copyright ₢ 2023 - FutCards Brasil 
+                    </Heading>
 
-        </VStack>
+                </VStack>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }
