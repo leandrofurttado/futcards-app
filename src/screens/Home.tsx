@@ -1,26 +1,28 @@
 import { HStack, Heading, VStack, Image, Icon } from "native-base";
-import { BookOpen, IdentificationCard, ShoppingCart, SoccerBall, StarFour } from 'phosphor-react-native'
+import { BookOpen, IdentificationCard, ShoppingCart, SoccerBall, StarFour, User } from 'phosphor-react-native'
 import FutCardsLogo from "../assets/bayernlogo.png"
 import BayernLogo from "../assets/bayernlogo.png"
 import MessiLogo from "../assets/messi.jpg"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import React from "react";
 import { Loading } from "../components/loading";
 import { TouchableOpacity, View } from "react-native";
 import STYLES from "../styles/stylesPages";
-
+import { AuthContext } from "../contexts/authLogin";
 
 
 
 export function Home() {
     const [userData, setUserData] = useState(null);
     const [roletaOn, setRoletaOn] = useState(true);
+
+    const { idUser } = useContext(AuthContext); //pega o id do usuario logado
   
     useEffect(() => {
       // Função assíncrona para buscar os dados da API
       async function fetchData() {
         try {
-            const response = await fetch('https://futcardsbrasil.000webhostapp.com/usuarios/consultar/40');
+            const response = await fetch(`https://futcardsbrasil.000webhostapp.com/usuarios/consultar/${idUser}`);
             const data = await response.json();
             setUserData(data); // Armazena os dados da API no estado
         } catch (error) {

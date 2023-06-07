@@ -6,17 +6,18 @@ import { Alert } from "react-native";
 //TYPAGEM DO CONTEXT PARA EVITAR ERROS
 interface AuthContextType {
   logar: (username: string, password: string) => void;
-  user: string;
+  idUser: string;
 }
 
 //APLICAÇÃO DA TIPAGEM NO CONTEXT
 export const AuthContext = createContext<AuthContextType>({
   logar: () => {},
-  user: '',
+  idUser: '',
 });
 
 function AuthProvider({children}){
-  const [user, setUser] = useState('');
+  const [idUser, setIdUser] = useState('');
+  const navegar = useNavigation();
 
   function logar(username, password) {
     if(!username && !password){
@@ -53,7 +54,8 @@ function AuthProvider({children}){
               return Alert.alert('Erro', 'Usuário ou senha inválidos.')
             } else if (data["0"]=="sucesso"){
               Alert.alert('Sucesso', 'Login efetuado com sucesso!')
-              setUser(username);
+              setIdUser(data["mensagem"]);
+              navegar.navigate("home");
             }
 
           } catch (error) {
@@ -67,7 +69,7 @@ function AuthProvider({children}){
 
   return(
     //provider irá passar para outros lugares o USUARIO logado.
-      <AuthContext.Provider value={{ logar , user}}>
+      <AuthContext.Provider value={{ logar , idUser}}>
           {children}
       </AuthContext.Provider>
   )

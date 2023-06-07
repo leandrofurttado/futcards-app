@@ -5,20 +5,18 @@ import { Loading } from './src/components/loading';
 import { Routes } from './src/routes';
 import AuthProvider from './src/contexts/authLogin';
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
 
   return (
     <NativeBaseProvider>
-      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-      {fontsLoaded ? (
+      <NavigationContainer>
         <AuthProvider>
           <Routes />
         </AuthProvider>
-      ) : (
-        <Loading />
-      )}
+      </NavigationContainer>
     </NativeBaseProvider>
   );
 }
