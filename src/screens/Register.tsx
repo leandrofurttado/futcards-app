@@ -7,20 +7,15 @@ import { Button } from "../components/Button";
 import * as Animatable from 'react-native-animatable';
 import { AuthContext } from "../contexts/authLogin";
 import { TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
-export default function SignIn() {
+export default function Register() {
     const [isLoading, setIsLoading] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    
-    const navegar = useNavigation();
+
     
     const { logar }  = useContext(AuthContext);
 
-    function handleTelaRegistrar(){
-        navegar.navigate('register');
-    }
 
     function LoadingLogin(){
         logar(username, password);
@@ -44,7 +39,7 @@ export default function SignIn() {
                 FUTCARDS
             </Animatable.Text>
             <Heading color="gray.100" fontSize="xl" mt={10}>
-                Acesse sua conta:
+                Cadastro 
             </Heading>
 
             <Heading color="gray.100" fontSize="md" mt={10}>
@@ -100,7 +95,7 @@ export default function SignIn() {
             
             <Text style={{ color: 'white', fontSize: 12, marginTop: 15 }}>
                 Não possui conta?
-                <TouchableOpacity onPress={handleTelaRegistrar}>
+                <TouchableOpacity >
                     <Text style={{ color: 'white', fontSize: 15, marginTop: 5, marginLeft: 5 , backgroundColor: 'rgba(128, 128, 128, 0.5)', borderRadius: 10 }}>
                     Registre-se aqui.
                     </Text>
