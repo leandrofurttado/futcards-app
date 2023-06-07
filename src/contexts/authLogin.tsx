@@ -2,6 +2,7 @@ import React, {createContext, useState } from "react";
 
 import { useNavigation } from "@react-navigation/native";
 import { Alert } from "react-native";
+import { Loading } from "../components/loading";
 
 //TYPAGEM DO CONTEXT PARA EVITAR ERROS
 interface AuthContextType {
@@ -47,8 +48,6 @@ function AuthProvider({children}){
             });
             const data = await response.json();
 
-            console.log(data);
-            
             //Momento da ultima verificação de login.
             if(data["0"]=="erro"){
               return Alert.alert('Erro', 'Usuário ou senha inválidos.')

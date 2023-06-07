@@ -9,11 +9,12 @@ export function Button({ title, ...rest }:Props) {
     return (
         <ButtonNativeBase 
         bg="yellow.500"
-        h={12}
-        w={100}
+        height={10}
+        width= {328}
+        size="md"
         fontSize="md"
         rounded="md"
-        mt={10}
+        mt={5}
         {...rest}
         _pressed={{bg: 'yellow.800'}}>
             <Heading color="black" fontSize="md">
