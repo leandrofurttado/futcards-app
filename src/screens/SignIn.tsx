@@ -20,7 +20,7 @@ export default function SignIn() {
     const { logar, isReady }  = useContext(AuthContext);
 
     function handleTelaRegistrar(){
-        navegar.navigate('register');
+        navegar.navigate('register'); //TODO verificar o motivo da sinalização de erro
     }
 
     function LoadingLogin(){

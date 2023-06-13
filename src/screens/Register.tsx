@@ -1,21 +1,44 @@
 import { VStack, Heading, Icon, Image, Text, KeyboardAvoidingView, ScrollView } from "native-base";
 import React, { useContext, useState } from "react";
 import Input from "../components/Input";
-import { Envelope, Key } from 'phosphor-react-native'
+import { ArrowLeft, Envelope, Key } from 'phosphor-react-native'
 import FutCardsLogo from '../assets/FutCards_logo.png'
 import { Button } from "../components/Button";
 import * as Animatable from 'react-native-animatable';
 import { AuthContext } from "../contexts/authLogin";
 import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import * as ImagePicker from "expo-image-picker";
 
 export default function Register() {
-    const [isLoading, setIsLoading] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const [image, setImage] = useState('');
+
+    const navegar = useNavigation();
     
     const { logar }  = useContext(AuthContext);
 
+    async function _handleImagePicker() {
+        const result = await ImagePicker.launchImageLibraryAsync(
+            {
+                aspect: [4,4],
+                allowsEditing: true,
+                base64: true,
+                quality: 1,
+            }
+        );
+
+        if (!result.cancelled) {
+            console.log(result);
+        }
+    }
+
+
+    function _handleBackLogin(){
+        navegar.navigate('signin'); //TODO verificar o motivo da sinalização de erro
+    }
 
     function LoadingLogin(){
         logar(username, password);
@@ -44,7 +67,7 @@ export default function Register() {
                         Cadastre-se:
                     </Heading>
 
-                    <Heading color="gray.100" fontSize="md" mt={10}>
+                    <Heading color="gray.100" fontSize="md" mt={5}>
                         Usuario:
                     </Heading>
                     <Input 
@@ -67,7 +90,7 @@ export default function Register() {
                         InputLeftElement={<Icon as={<Envelope color={"white"}/> } ml={3} />}
                     />
 
-                    <Heading color="gray.100" fontSize="md" mt={4}>
+                    <Heading color="gray.100" fontSize="md" mt={2}>
                         Senha:
                     </Heading>
                     <Input 
@@ -89,23 +112,45 @@ export default function Register() {
 
                         InputLeftElement={<Icon as={<Key color={"white"}/> } ml={3} />}
                     />
+                    <Heading color="gray.100" fontSize="md" mt={2}>
+                        Confirme sua Senha:
+                    </Heading>
+                    <Input 
+                        placeholder="Confirme sua senha"
+                        placeholderTextColor={"white"}
+                        value={password}
+                        onChangeText={(text) => setPassword(text)}
+                        backgroundColor="#4F4F4F"
+                        secureTextEntry
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        mb={4}
+                        mt={4}
+                        _focus={{
+                            borderWidth: 2,
+                            borderColor: "white",
+                            backgroundColor:"gray.400",
+                        }}
+
+                        InputLeftElement={<Icon as={<Key color={"white"}/> } ml={3} />}
+                    />
+                    <TouchableOpacity onPress={_handleImagePicker} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={{backgroundColor: 'white', borderRadius: 10, padding: 5}}>
+                            Enviar imagem de perfil
+                        </Text>
+                    </TouchableOpacity>
+                    
                     <Button 
-                        title={"Entrar"}
+                        title={"Finalizar cadastro"}
                         onPress={LoadingLogin}
                     />
                     
-                    <Text style={{ color: 'white', fontSize: 12, marginTop: 15 }}>
-                        Não possui conta?
-                        <TouchableOpacity >
-                            <Text style={{ color: 'white', fontSize: 15, marginTop: 15, marginLeft: 5 , backgroundColor: 'rgba(128, 128, 128, 0.5)', borderRadius: 10 }}>
-                            Registre-se aqui.
-                            </Text>
-                        </TouchableOpacity>
-                    </Text>
-
-                    <Heading color="gray.100" fontSize="xs" mt={20} >
-                        Copyright ₢ 2023 - FutCards Brasil 
-                    </Heading>
+                    <TouchableOpacity onPress={_handleBackLogin} style={{ flexDirection: 'row', alignItems: 'center', marginTop: 30 }}>
+                        <ArrowLeft size={20} weight="bold" style={{ marginRight: 5 }} color="white"/>
+                        <Text style={{ color: 'white', fontSize: 15, backgroundColor: 'rgba(128, 128, 128, 0.5)', borderRadius: 10 }}>
+                            Voltar ao login.
+                        </Text>
+                    </TouchableOpacity>
 
                 </VStack>
             </ScrollView>
