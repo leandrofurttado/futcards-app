@@ -56,7 +56,11 @@ export function Home() {
               style={{ width: 150, height: 150, borderRadius: 30 }}
               alt="Perfil Foto"
             />
-          ) : null}
+          ) : <Image
+            source={BayernLogo}
+            style={{ width: 150, height: 150, borderRadius: 30 }}
+            alt="Perfil Foto"
+          />}
         </HStack>
 
         <Heading color="gray.100" fontSize="xl" mt={10}>
