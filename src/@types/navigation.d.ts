@@ -5,6 +5,8 @@ declare global {
   namespace ReactNavigation {
     interface RootParamList {
       home: undefined;
+      register:undefined;
+      signin: undefined;
     }
   }
 }
