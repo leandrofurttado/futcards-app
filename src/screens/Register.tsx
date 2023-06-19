@@ -72,11 +72,11 @@ export default function Register() {
                         {isReady ? <Loading /> : 'FUTCARDS - Cadastro'}
                     </Animatable.Text>
 
-                    <Heading color="gray.100" fontSize="2xl" mt={5}>
+                    <Heading color="gray.100" fontSize="2xl" mt={2}>
                         Cadastre-se:
                     </Heading>
 
-                    <Heading color="gray.100" fontSize="md" mt={2}>
+                    <Heading color="gray.100" fontSize="md" mt={10}>
                         Nome Completo:
                     </Heading>
                     <Input

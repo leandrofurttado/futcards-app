@@ -102,17 +102,14 @@ export default function SignIn() {
                         onPress={LoadingLogin}
                     />
 
-                    <Text style={{ color: 'white', fontSize: 12, marginTop: 15 }}>
+                    <Text style={{ color: 'white', fontSize: 15,  top: 20}}>
                         Não possui conta?
                         <TouchableOpacity onPress={handleTelaRegistrar}>
-                            <Text style={{ color: 'white', fontSize: 15, marginTop: 20, marginLeft: 5, backgroundColor: 'rgba(128, 128, 128, 0.5)', borderRadius: 10 }}>
+                            <Text style={{ color: 'white', fontSize: 15, marginLeft: 5, top:5, backgroundColor: 'rgba(128, 128, 128, 0.5)', borderRadius: 10, alignItems:'center', justifyContent:'center' }}>
                                 Registre-se aqui.
                             </Text>
                         </TouchableOpacity>
                     </Text>
-
-
-
                 </VStack>
                 <VStack bg="green.700" alignItems="center">
                     <Heading color="white" fontSize="xs" mb={10}>
