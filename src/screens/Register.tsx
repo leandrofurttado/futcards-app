@@ -6,7 +6,7 @@ import FutCardsLogo from '../assets/FutCards_logo.png'
 import { Button } from "../components/Button";
 import * as Animatable from 'react-native-animatable';
 import { AuthContextCadastro } from "../contexts/authCadastro";
-import { TouchableOpacity, View } from "react-native";
+import { Alert, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import { Loading } from "../components/loading";
@@ -34,7 +34,15 @@ export default function Register() {
         );
 
         if (!result.cancelled) {
-            setImage(result.base64);
+            const imageSizeInBytes = result["base64"].length;
+            const imageSizeInKB = Math.round(imageSizeInBytes / 1024);
+            const maxSizeInKB = 2048; // Tamanho máximo permitido em KB
+    
+            if (imageSizeInKB > maxSizeInKB) {
+                return Alert.alert('Erro', 'Imagem superior a 2MB. Foto deve ser até 2MB');
+            }
+
+            setImage(result["base64"]);
         }
     }
 

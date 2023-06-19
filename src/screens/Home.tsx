@@ -13,10 +13,9 @@ import { AuthContext } from "../contexts/authLogin";
 
 
 export function Home() {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState('');
   const [roletaOn, setRoletaOn] = useState(true);
 
-  const [imagePerfil, setImagePerfil] = useState();
 
   const { idUser } = useContext(AuthContext); //pega o id do usuario logado
 
@@ -26,20 +25,19 @@ export function Home() {
     async function fetchData() {
       try {
         const response = await fetch(`https://futcardsbrasil.000webhostapp.com/usuarios/consultar/${idUser}`, {
-              method: 'GET',
-            });
+          method: 'GET',
+        });
         const data = await response.json();
         setUserData(data); // Armazena os dados da API no estado
-        if (data && data.imageBase64) {
-          setImagePerfil(imagePerfil);
-        }
+
       } catch (error) {
-        setUserData(false);
+        setUserData('');
       }
     }
 
     fetchData(); // Chama a função de busca de dados quando o componente for montado
   }, []);
+
 
   return (
     <View style={{ flex: 1 }}>
@@ -52,21 +50,21 @@ export function Home() {
           display="flex"
           backgroundColor="green.900"
         >
-          <Image
-            source={{ uri: `data:image/jpeg;base64,${imagePerfil}` }} //TODO verificar porque nao exibe o base64
-            resizeMode="contain"
-            size={150}
-            borderRadius={30}
-            alt="perfil-img"
-          />
+          {userData["imageBase64"] ? (
+            <Image
+              source={{ uri: `data:image/jpeg;base64,${userData["imageBase64"]}` }}
+              style={{ width: 150, height: 150, borderRadius: 30 }}
+              alt="Perfil Foto"
+            />
+          ) : null}
         </HStack>
 
         <Heading color="gray.100" fontSize="xl" mt={10}>
-          {userData ? `Bem vindo, ${userData.nome_completo}!` : <Loading />}
+          {userData ? `Bem vindo, ${userData["nome_completo"]}!` : <Loading />}
         </Heading>
 
         <Heading display="flex" color="gray.100" fontSize="xl" mt={5}>
-          FC Points: {userData ? userData.credits : '-'}
+          FC Points: {userData ? userData["credits"] : '-'}
         </Heading>
 
         {/* Editar */}

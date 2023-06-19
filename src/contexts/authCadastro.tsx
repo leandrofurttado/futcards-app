@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react";
 
 import { Alert } from "react-native";
 import { Loading } from "../components/loading";
+import { useNavigation } from "@react-navigation/native";
 
 
 //TYPAGEM DO CONTEXT PARA EVITAR ERROS
@@ -18,6 +19,7 @@ export const AuthContextCadastro = createContext<AuthContextType>({
 
 function AuthProviderCadastro({ children }) {
     const [isReady, setIsReady] = useState(false);
+    const navegar = useNavigation();
 
     function cadastrar(username, password, confirmPassword, nomeCompleto, fotoPerfil) {
         if (!username && !password && !nomeCompleto &&!confirmPassword) {
@@ -60,18 +62,17 @@ function AuthProviderCadastro({ children }) {
                     });
                     const data = await response.json();
 
-                    console.log(data)
-
                     //Momento da ultima verificação de login.
                     if (data["0"] == "erro") {
                         return Alert.alert('Erro', 'Dados inválidos.')
                     } else if (data["0"] == "sucesso") {
                         setIsReady(false);
                         Alert.alert('Sucesso', 'Cadastro efetuado com sucesso! Agora faça o login!')
+                        navegar.navigate("signin");
                     }
 
                 } catch (error) {
-                    return Alert.alert('Erro', 'Usuário não encontrado em nosso banco de dados!');
+                    return Alert.alert('Erro', 'Falha ao cadastrar no nosso banco de dados!');
                 }
             }
 
