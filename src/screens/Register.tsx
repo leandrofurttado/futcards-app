@@ -23,13 +23,10 @@ export default function Register() {
 
     const { cadastrar, isReady } = useContext(AuthContextCadastro);
 
-    async function _handleImagePicker(){
+    async function _handleImagePicker() {
         const result = await ImagePicker.launchImageLibraryAsync(
             {
-                aspect: [4, 4],
-                allowsEditing: true,
                 base64: true,
-                quality: 1,
             }
         );
 
@@ -37,7 +34,7 @@ export default function Register() {
             const imageSizeInBytes = result["base64"].length;
             const imageSizeInKB = Math.round(imageSizeInBytes / 1024);
             const maxSizeInKB = 2048; // Tamanho máximo permitido em KB
-    
+
             if (imageSizeInKB > maxSizeInKB) {
                 return Alert.alert('Erro', 'Imagem superior a 2MB. Foto deve ser até 2MB');
             }
@@ -48,7 +45,7 @@ export default function Register() {
 
 
     function _handleBackLogin() {
-        navegar.navigate('signin'); 
+        navegar.navigate('signin');
     }
 
     function _handleCadastrar() {
@@ -72,7 +69,7 @@ export default function Register() {
                         delay={1000}
                         style={{ color: 'yellow', fontSize: 25, fontWeight: 'bold' }}
                     >
-                         {isReady ? <Loading /> : 'FUTCARDS - Cadastro'}
+                        {isReady ? <Loading /> : 'FUTCARDS - Cadastro'}
                     </Animatable.Text>
 
                     <Heading color="gray.100" fontSize="2xl" mt={5}>
@@ -169,14 +166,14 @@ export default function Register() {
 
                         InputLeftElement={<Icon as={<Key color={"white"} />} ml={3} />}
                     />
-                    <View style={{justifyContent: 'flex-start'}}>
+                    <View style={{ justifyContent: 'flex-start' }}>
                         <TouchableOpacity onPress={_handleImagePicker} style={{ display: 'flex', marginTop: 20, marginBottom: 15 }}>
-                            <Text style={{ backgroundColor: "black", borderRadius: 10, padding: 10, color:'yellow' }}>
+                            <Text style={{ backgroundColor: "black", borderRadius: 10, padding: 10, color: 'yellow' }}>
                                 Enviar imagem de perfil
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    
+
                     <Button
                         title={"Finalizar cadastro"}
                         onPress={_handleCadastrar}
