@@ -18,7 +18,7 @@ export const AuthContext = createContext<AuthContextType>({
   isReady: false,
 });
 
-function AuthProvider({children}){
+function AuthProviderLogin({children}){
   const [idUser, setIdUser] = useState('');
   const [isReady, setIsReady] = useState(false);
   const navegar = useNavigation();
@@ -82,4 +82,4 @@ function AuthProvider({children}){
   )
 }
 
-export default AuthProvider;
+export default AuthProviderLogin;

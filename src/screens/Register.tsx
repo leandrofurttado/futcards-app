@@ -5,10 +5,12 @@ import { ArrowLeft, Envelope, Key } from 'phosphor-react-native'
 import FutCardsLogo from '../assets/FutCards_logo.png'
 import { Button } from "../components/Button";
 import * as Animatable from 'react-native-animatable';
-import { AuthContext } from "../contexts/authLogin";
+import { AuthContextCadastro } from "../contexts/authCadastro";
 import { TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
+import { Loading } from "../components/loading";
+
 
 export default function Register() {
     const [username, setUsername] = useState('');
@@ -19,9 +21,9 @@ export default function Register() {
 
     const navegar = useNavigation();
 
-    const { logar } = useContext(AuthContext);
+    const { cadastrar, isReady } = useContext(AuthContextCadastro);
 
-    async function _handleImagePicker() {
+    async function _handleImagePicker(){
         const result = await ImagePicker.launchImageLibraryAsync(
             {
                 aspect: [4, 4],
@@ -32,7 +34,7 @@ export default function Register() {
         );
 
         if (!result.cancelled) {
-            console.log(result);
+            setImage(result.base64);
         }
     }
 
@@ -41,8 +43,8 @@ export default function Register() {
         navegar.navigate('signin'); 
     }
 
-    function LoadingLogin() {
-        logar(username, password);
+    function _handleCadastrar() {
+        cadastrar(username, password, confirmPass, nameUser, image);
     }
 
     const [isVisible, setIsVisible] = React.useState(false);
@@ -62,7 +64,7 @@ export default function Register() {
                         delay={1000}
                         style={{ color: 'yellow', fontSize: 25, fontWeight: 'bold' }}
                     >
-                        FUTCARDS - Cadastro
+                         {isReady ? <Loading /> : 'FUTCARDS - Cadastro'}
                     </Animatable.Text>
 
                     <Heading color="gray.100" fontSize="2xl" mt={5}>
@@ -144,7 +146,7 @@ export default function Register() {
                         placeholder="Confirme sua senha"
                         placeholderTextColor={"white"}
                         value={confirmPass}
-                        onChangeText={(text) => setPassword(text)}
+                        onChangeText={(text) => setConfirmPass(text)}
                         backgroundColor="#4F4F4F"
                         secureTextEntry
                         autoCapitalize="none"
@@ -169,7 +171,7 @@ export default function Register() {
                     
                     <Button
                         title={"Finalizar cadastro"}
-                        onPress={LoadingLogin}
+                        onPress={_handleCadastrar}
                     />
 
                     <TouchableOpacity onPress={_handleBackLogin} style={{ flexDirection: 'row', alignItems: 'center', marginTop: 30 }}>

@@ -3,7 +3,8 @@ import { Roboto_400Regular, Roboto_700Bold, useFonts } from '@expo-google-fonts/
 import { THEME } from './src/styles/theme';
 import { Loading } from './src/components/loading';
 import { Routes } from './src/routes';
-import AuthProvider from './src/contexts/authLogin';
+import AuthProviderLogin from './src/contexts/authLogin';
+import AuthProviderCadastro from './src/contexts/authCadastro';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -13,9 +14,11 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <AuthProvider>
-          <Routes />
-        </AuthProvider>
+        <AuthProviderLogin>
+          <AuthProviderCadastro>
+            <Routes />
+          </AuthProviderCadastro>
+        </AuthProviderLogin>
       </NavigationContainer>
     </NativeBaseProvider>
   );
