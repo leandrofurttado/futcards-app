@@ -1,14 +1,14 @@
 import { HStack, Heading, VStack, Image, Icon } from "native-base";
 import { BookOpen, IdentificationCard, ShoppingCart, SoccerBall, StarFour, User } from 'phosphor-react-native'
-import FutCardsLogo from "../assets/bayernlogo.png"
 import BayernLogo from "../assets/bayernlogo.png"
-import MessiLogo from "../assets/messi.jpg"
 import { useContext, useEffect, useState } from "react";
 import React from "react";
 import { Loading } from "../components/loading";
 import { TouchableOpacity, View } from "react-native";
 import STYLES from "../styles/stylesPages";
 import { AuthContext } from "../contexts/authLogin";
+import { THEME } from "../styles/theme";
+import { useNavigation } from "@react-navigation/native";
 
 
 
@@ -16,6 +16,7 @@ export function Home() {
   const [userData, setUserData] = useState('');
   const [roletaOn, setRoletaOn] = useState(true);
 
+  const navegar = useNavigation();
 
   const { idUser } = useContext(AuthContext); //pega o id do usuario logado
 
@@ -53,27 +54,32 @@ export function Home() {
           {userData["imageBase64"] ? (
             <Image
               source={{ uri: `data:image/jpeg;base64,${userData["imageBase64"]}` }}
-              style={{ width: 150, height: 150, borderRadius: 30 }}
+              style={{ width: 150, height: 150, borderRadius: 100, borderWidth: 2, borderColor: THEME.colors.white }}
               alt="Perfil Foto"
             />
           ) : <Image
             source={BayernLogo}
-            style={{ width: 150, height: 150, borderRadius: 30 }}
+            style={{ width: 150, height: 150, borderRadius: 100 }}
             alt="Perfil Foto"
           />}
         </HStack>
 
-        <Heading color="gray.100" fontSize="xl" mt={10}>
-          {userData ? `Bem vindo, ${userData["nome_completo"]}!` : <Loading />}
-        </Heading>
+        <View style={{flexDirection:'column', justifyContent: 'flex-start', }}>
+          <Heading color="gray.100" fontSize="xl" mt={10}>
+            {userData ? `Bem vindo, ${userData["nome_completo"]}!` : <Loading />}
+          </Heading>
 
-        <Heading display="flex" color="gray.100" fontSize="xl" mt={5}>
-          FC Points: {userData ? userData["credits"] : '-'}
-        </Heading>
+          <Heading display="flex" color="gray.100" fontSize="xl" mt={5}>
+            * FC Points: {userData ? userData["credits"] : '-'}$
+          </Heading>
+        </View>
+
+
 
         {/* Editar */}
         <TouchableOpacity
           style={STYLES.button_style_editarPerfil}
+          onPress={() => {navegar.navigate('Configuracoes')}}
         >
           <IdentificationCard size={30} weight="bold" color="black" style={{ display: 'flex' }} />
           <Heading display="flex" color="black" fontSize="xl" alignItems="center" ml={2}>
@@ -120,7 +126,7 @@ export function Home() {
         }}
       >
 
-        <Heading display="flex" color="black" fontSize="xl" mb={2}>
+        <Heading display="flex" color={"black"} fontSize="xl" mb={2}>
           {roletaOn ? 'Roleta diária disponível' : 'Roleta indisponível, aguarde para jogar.'}
         </Heading>
         <StarFour size={30} weight="bold" color="black" />

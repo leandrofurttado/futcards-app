@@ -7,6 +7,7 @@ declare global {
       home: undefined;
       register:undefined;
       signin: undefined;
+      Configuracoes:undefined;
     }
   }
 }

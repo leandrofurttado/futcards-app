@@ -37,86 +37,85 @@ export default function SignIn() {
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
-            <ScrollView>
-                <VStack bg="green.700" alignItems="flex-start" px={8} py={24}>
-                    <Image source={FutCardsLogo} resizeMode="contain" size={20} alt="logo" />
-                    <Animatable.Text
-                        animation="fadeIn"
-                        duration={5000}
-                        delay={2000}
-                        style={{ color: 'yellow', fontSize: 25, marginTop: 5, fontWeight: 'bold' }}
-                    >
-                        {isReady ? <Loading /> : 'FUTCARDS'}
-                    </Animatable.Text>
-                    <Heading color="gray.100" fontSize="2xl" mt={5}>
-                        Acesse sua conta:
-                    </Heading>
 
-                    <Heading color="gray.100" fontSize="md" mt={10}>
-                        Usuario:
-                    </Heading>
-                    <Input
-                        placeholder="Usuário"
-                        backgroundColor="#4F4F4F"
-                        value={username}
-                        onChangeText={(text) => setUsername(text)}
-                        placeholderTextColor={"white"}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        mb={4}
-                        mt={4}
-                        _focus={{
-                            borderWidth: 2,
-                            borderColor: "white",
-                            backgroundColor: "gray.400"
-                        }}
+            <VStack bg="green.700" alignItems="flex-start" px={8} py={24} h='100%'>
+                <Image source={FutCardsLogo} resizeMode="contain" size={20} alt="logo" />
+                <Animatable.Text
+                    animation="fadeIn"
+                    duration={5000}
+                    delay={2000}
+                    style={{ color: 'yellow', fontSize: 25, marginTop: 5, fontWeight: 'bold' }}
+                >
+                    {isReady ? <Loading /> : 'FUTCARDS'}
+                </Animatable.Text>
+                <Heading color="gray.100" fontSize="2xl" mt={5}>
+                    Acesse sua conta:
+                </Heading>
 
-                        InputLeftElement={<Icon as={<Envelope color={"white"} />} ml={3} />}
-                    />
+                <Heading color="gray.100" fontSize="md" mt={10}>
+                    Usuario:
+                </Heading>
+                <Input
+                    placeholder="Usuário"
+                    backgroundColor="#4F4F4F"
+                    value={username}
+                    onChangeText={(text) => setUsername(text)}
+                    placeholderTextColor={"white"}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    mb={4}
+                    mt={4}
+                    _focus={{
+                        borderWidth: 2,
+                        borderColor: "white",
+                        backgroundColor: "gray.400"
+                    }}
 
-                    <Heading color="gray.100" fontSize="md" mt={4}>
-                        Senha:
-                    </Heading>
-                    <Input
-                        placeholder="Senha"
-                        placeholderTextColor={"white"}
-                        value={password}
-                        onChangeText={(text) => setPassword(text)}
-                        backgroundColor="#4F4F4F"
-                        secureTextEntry
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        mb={4}
-                        mt={4}
-                        _focus={{
-                            borderWidth: 2,
-                            borderColor: "white",
-                            backgroundColor: "gray.400",
-                        }}
+                    InputLeftElement={<Icon as={<Envelope color={"white"} />} ml={3} />}
+                />
 
-                        InputLeftElement={<Icon as={<Key color={"white"} />} ml={3} />}
-                    />
-                    <Button
-                        title={"Entrar"}
-                        onPress={LoadingLogin}
-                    />
+                <Heading color="gray.100" fontSize="md" mt={4}>
+                    Senha:
+                </Heading>
+                <Input
+                    placeholder="Senha"
+                    placeholderTextColor={"white"}
+                    value={password}
+                    onChangeText={(text) => setPassword(text)}
+                    backgroundColor="#4F4F4F"
+                    secureTextEntry
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    mb={4}
+                    mt={4}
+                    _focus={{
+                        borderWidth: 2,
+                        borderColor: "white",
+                        backgroundColor: "gray.400",
+                    }}
 
-                    <Text style={{ color: 'white', fontSize: 15,  top: 20}}>
-                        Não possui conta?
-                        <TouchableOpacity onPress={handleTelaRegistrar}>
-                            <Text style={{ color: 'white', fontSize: 15, marginLeft: 5, top:5, backgroundColor: 'rgba(128, 128, 128, 0.5)', borderRadius: 10, alignItems:'center', justifyContent:'center' }}>
-                                Registre-se aqui.
-                            </Text>
-                        </TouchableOpacity>
-                    </Text>
-                </VStack>
-                <VStack bg="green.700" alignItems="center">
-                    <Heading color="white" fontSize="xs" mb={10}>
-                        Copyright ₢ 2023 - FutCards Brasil
-                    </Heading>
-                </VStack>
-            </ScrollView>
+                    InputLeftElement={<Icon as={<Key color={"white"} />} ml={3} />}
+                />
+                <Button
+                    title={"Entrar"}
+                    onPress={LoadingLogin}
+                />
+
+                <Text style={{ color: 'white', fontSize: 15, top: 20 }}>
+                    Não possui conta?
+                    <TouchableOpacity onPress={handleTelaRegistrar}>
+                        <Text style={{ color: 'white', fontSize: 15, marginLeft: 5, top: 5, backgroundColor: 'rgba(128, 128, 128, 0.5)', borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+                            Registre-se aqui.
+                        </Text>
+                    </TouchableOpacity>
+                </Text>
+            </VStack>
+            <VStack bg="green.700" alignItems="center">
+                <Heading color="white" fontSize="xs" mb={10}>
+                    Copyright ₢ 2023 - FutCards Brasil
+                </Heading>
+            </VStack>
         </KeyboardAvoidingView>
     );
 }
